@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday, Ananya 🌸</title>
+<title>Happy Birthday, Annu 🌸</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
 <!-- floating hearts layer (filled by JS) -->
 <div class="hearts-layer" id="heartsLayer"></div>
 
-<!-- background song — see README to add your own mp3 -->
+<!-- background song (Darkhast) — plays site-wide -->
 <audio id="bgMusic" loop>
   <source src="audio/song.mp3" type="audio/mpeg">
 </audio>
@@ -33,12 +33,12 @@
 
 <!-- NAV -->
 <nav class="navbar">
-  <span class="nav-logo">for Ananya 🎀</span>
+  <span class="nav-logo">for Annu 🎀</span>
 
   <div class="nav-links" id="navLinks">
     <a href="#home">home</a>
     <a href="#gallery">gallery</a>
-    <a href="#slideshow-teaser">slideshow</a>
+    <a href="#our-video">video</a>
     <a href="#reasons">reasons</a>
     <a href="#letter">letter</a>
   </div>
@@ -104,29 +104,90 @@
       <circle cx="30" cy="30" r="7" fill="var(--gold)"/>
     </svg>
   </div>
+  <div class="hero-flower flower-5" style="color:var(--gold)">
+    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <g fill="currentColor" opacity="0.85">
+        <ellipse cx="30" cy="16" rx="9" ry="14"/>
+        <ellipse cx="30" cy="16" rx="9" ry="14" transform="rotate(72 30 30)"/>
+        <ellipse cx="30" cy="16" rx="9" ry="14" transform="rotate(144 30 30)"/>
+        <ellipse cx="30" cy="16" rx="9" ry="14" transform="rotate(216 30 30)"/>
+        <ellipse cx="30" cy="16" rx="9" ry="14" transform="rotate(288 30 30)"/>
+      </g>
+      <circle cx="30" cy="30" r="7" fill="var(--rose-deep)"/>
+    </svg>
+  </div>
+  <div class="hero-flower flower-6" style="color:var(--rose)">
+    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <g fill="currentColor" opacity="0.85">
+        <ellipse cx="30" cy="16" rx="9" ry="14"/>
+        <ellipse cx="30" cy="16" rx="9" ry="14" transform="rotate(72 30 30)"/>
+        <ellipse cx="30" cy="16" rx="9" ry="14" transform="rotate(144 30 30)"/>
+        <ellipse cx="30" cy="16" rx="9" ry="14" transform="rotate(216 30 30)"/>
+        <ellipse cx="30" cy="16" rx="9" ry="14" transform="rotate(288 30 30)"/>
+      </g>
+      <circle cx="30" cy="30" r="7" fill="#fff"/>
+    </svg>
+  </div>
+
+  <!-- SPARKLES -->
+  <div class="hero-sparkle sparkle-1" style="color:var(--gold)">
+    <svg viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+  </div>
+  <div class="hero-sparkle sparkle-2" style="color:var(--rose-deep)">
+    <svg viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+  </div>
+  <div class="hero-sparkle sparkle-3" style="color:var(--lavender)">
+    <svg viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+  </div>
+  <div class="hero-sparkle sparkle-4" style="color:var(--sage-deep)">
+    <svg viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+  </div>
+  <div class="hero-sparkle sparkle-5" style="color:var(--gold)">
+    <svg viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor"/></svg>
+  </div>
+
+  <!-- MINI HEARTS -->
+  <div class="hero-mini-heart mini-heart-1" style="color:var(--rose-deep)">
+    <svg viewBox="0 0 32 29"><path d="M23.6 0c-3 0-5.6 1.7-7.6 4.9C14 1.7 11.4 0 8.4 0 3.8 0 0 3.8 0 8.5c0 7 8 13 16 20.5 8-7.5 16-13.5 16-20.5C32 3.8 28.2 0 23.6 0z" fill="currentColor"/></svg>
+  </div>
+  <div class="hero-mini-heart mini-heart-2" style="color:var(--rose)">
+    <svg viewBox="0 0 32 29"><path d="M23.6 0c-3 0-5.6 1.7-7.6 4.9C14 1.7 11.4 0 8.4 0 3.8 0 0 3.8 0 8.5c0 7 8 13 16 20.5 8-7.5 16-13.5 16-20.5C32 3.8 28.2 0 23.6 0z" fill="currentColor"/></svg>
+  </div>
+  <div class="hero-mini-heart mini-heart-3" style="color:var(--lavender)">
+    <svg viewBox="0 0 32 29"><path d="M23.6 0c-3 0-5.6 1.7-7.6 4.9C14 1.7 11.4 0 8.4 0 3.8 0 0 3.8 0 8.5c0 7 8 13 16 20.5 8-7.5 16-13.5 16-20.5C32 3.8 28.2 0 23.6 0z" fill="currentColor"/></svg>
+  </div>
 
   <p class="eyebrow">a little corner of the internet, just for you</p>
-  <h1 class="hero-title">Happy Birthday,<br><span>Ananya</span></h1>
+  <h1 class="hero-title">Happy Birthday,<br><span>Annu</span></h1>
 
   <!-- HERO POLAROIDS — swap in your own favorite photos of her -->
-  <p class="section-note hero-photos-note">
-    (swap these four for your favorite photos of her — drop files in <code>images/</code>
-    named <code>her1.jpg</code> through <code>her4.jpg</code>)
-  </p>
-
   <div class="hero-scene-row">
 
     <div class="hero-side-photos hero-side-left">
-      <figure class="polaroid hero-polaroid hero-tilt-1">
-        <span class="pin">📌</span>
-        <img src="images/her1.jpg" alt="Ananya" onerror="this.src='https://via.placeholder.com/300x360/FBEAEA/E8A0A0?text=add+her1.jpg'">
-        <figcaption>her 🌸</figcaption>
-      </figure>
-      <figure class="polaroid hero-polaroid hero-tilt-2">
-        <span class="tape">🎀</span>
-        <img src="images/her2.jpg" alt="Ananya" onerror="this.src='https://via.placeholder.com/300x360/EAF3EE/A9C5A0?text=add+her2.jpg'">
-        <figcaption>her ☀️</figcaption>
-      </figure>
+      <div class="hero-photo-row">
+        <figure class="polaroid hero-polaroid hero-polaroid-pair hero-tilt-1">
+          <span class="pin">📌</span>
+          <img src="images/her1.jpg" alt="Annu" onerror="this.src='https://via.placeholder.com/300x360/FBEAEA/E8A0A0?text=add+her1.jpg'">
+          <figcaption>her 🌸</figcaption>
+        </figure>
+        <figure class="polaroid hero-polaroid hero-polaroid-pair hero-tilt-2">
+          <span class="tape">🎀</span>
+          <img src="images/her2.jpg" alt="Annu" onerror="this.src='https://via.placeholder.com/300x360/EAF3EE/A9C5A0?text=add+her2.jpg'">
+          <figcaption>her ☀️</figcaption>
+        </figure>
+      </div>
+      <div class="hero-photo-row hero-photo-side hero-photo-side-right">
+        <figure class="polaroid hero-polaroid hero-polaroid-pair hero-tilt-3">
+          <span class="pin">📌</span>
+          <img src="images/her3.jpg" alt="Annu" onerror="this.src='https://via.placeholder.com/300x360/F3EAF5/B69AD9?text=add+her3.jpg'">
+          <figcaption>her 🤍</figcaption>
+        </figure>
+        <figure class="polaroid hero-polaroid hero-polaroid-pair hero-tilt-7">
+          <span class="tape">🎀</span>
+          <img src="images/her7.jpg" alt="Annu" onerror="this.src='https://via.placeholder.com/300x360/FFF3E0/E8B86D?text=add+her7.jpg'">
+          <figcaption>her 🍀</figcaption>
+        </figure>
+      </div>
     </div>
 
     <!-- PENGUIN + CAKE SCENE -->
@@ -210,16 +271,30 @@
   </div>
 
     <div class="hero-side-photos hero-side-right">
-      <figure class="polaroid hero-polaroid hero-tilt-3">
-        <span class="pin">📌</span>
-        <img src="images/her3.jpg" alt="Ananya" onerror="this.src='https://via.placeholder.com/300x360/F3EAF5/B69AD9?text=add+her3.jpg'">
-        <figcaption>her 🤍</figcaption>
-      </figure>
-      <figure class="polaroid hero-polaroid hero-tilt-4">
-        <span class="tape">🎀</span>
-        <img src="images/her4.jpg" alt="Ananya" onerror="this.src='https://via.placeholder.com/300x360/FFF3E0/E8B86D?text=add+her4.jpg'">
-        <figcaption>her ✨</figcaption>
-      </figure>
+      <div class="hero-photo-row">
+        <figure class="polaroid hero-polaroid hero-polaroid-pair hero-tilt-4">
+          <span class="tape">🎀</span>
+          <img src="images/her4.jpg" alt="Annu" onerror="this.src='https://via.placeholder.com/300x360/FFF3E0/E8B86D?text=add+her4.jpg'">
+          <figcaption>her ✨</figcaption>
+        </figure>
+        <figure class="polaroid hero-polaroid hero-polaroid-pair hero-tilt-5">
+          <span class="pin">📌</span>
+          <img src="images/her5.jpg" alt="Annu" onerror="this.src='https://via.placeholder.com/300x360/EAF3EE/A9C5A0?text=add+her5.jpg'">
+          <figcaption>her 💫</figcaption>
+        </figure>
+      </div>
+      <div class="hero-photo-row hero-photo-side hero-photo-side-left">
+        <figure class="polaroid hero-polaroid hero-polaroid-pair hero-tilt-6">
+          <span class="tape">🎀</span>
+          <img src="images/her6.jpg" alt="Annu" onerror="this.src='https://via.placeholder.com/300x360/FBEAEA/E8A0A0?text=add+her6.jpg'">
+          <figcaption>her 🎀</figcaption>
+        </figure>
+        <figure class="polaroid hero-polaroid hero-polaroid-pair hero-tilt-8">
+          <span class="pin">📌</span>
+          <img src="images/her8.jpg" alt="Annu" onerror="this.src='https://via.placeholder.com/300x360/F3EAF5/B69AD9?text=add+her8.jpg'">
+          <figcaption>her 🌷</figcaption>
+        </figure>
+      </div>
     </div>
 
   </div>
@@ -232,47 +307,78 @@
 <section id="gallery" class="gallery-section reveal">
   <p class="eyebrow center">memories, pinned with love</p>
   <h2 class="section-title">our little gallery</h2>
-  <p class="section-note">
-    (Psst — swap the photos below! Put your pictures in the <code>images</code> folder
-    and update the <code>src</code> in <code>index.html</code>.
-    Click any photo to see it bigger.)
-  </p>
 
   <div class="masonry" id="masonry">
     <!-- POLAROID 1 -->
     <figure class="polaroid rotate-1">
       <span class="pin">📌</span>
-      <img src="images/photo1.jpg" alt="Ananya photo 1" onerror="this.src='https://via.placeholder.com/400x500/FBEAEA/E8A0A0?text=add+photo1.jpg'">
+      <img src="images/photo1.jpg" alt="Annu photo 1" onerror="this.src='https://via.placeholder.com/400x500/FBEAEA/E8A0A0?text=add+photo1.jpg'">
     </figure>
 
     <!-- POLAROID 2 -->
     <figure class="polaroid rotate-2 tall">
       <span class="tape">🎀</span>
-      <img src="images/photo2.jpg" alt="Ananya photo 2" onerror="this.src='https://via.placeholder.com/400x600/FDF3F0/D98A9A?text=add+photo2.jpg'">
+      <img src="images/photo2.jpg" alt="Annu photo 2" onerror="this.src='https://via.placeholder.com/400x600/FDF3F0/D98A9A?text=add+photo2.jpg'">
     </figure>
 
     <!-- POLAROID 3 -->
     <figure class="polaroid rotate-3">
       <span class="pin">📌</span>
-      <img src="images/photo3.jpg" alt="Ananya photo 3" onerror="this.src='https://via.placeholder.com/400x450/F3EAF5/B69AD9?text=add+photo3.jpg'">
+      <img src="images/photo3.jpg" alt="Annu photo 3" onerror="this.src='https://via.placeholder.com/400x450/F3EAF5/B69AD9?text=add+photo3.jpg'">
     </figure>
 
     <!-- POLAROID 4 -->
     <figure class="polaroid rotate-4 tall">
       <span class="tape">🎀</span>
-      <img src="images/photo4.jpg" alt="Ananya photo 4" onerror="this.src='https://via.placeholder.com/400x580/EAF3EE/A9C5A0?text=add+photo4.jpg'">
+      <img src="images/photo4.jpg" alt="Annu photo 4" onerror="this.src='https://via.placeholder.com/400x580/EAF3EE/A9C5A0?text=add+photo4.jpg'">
     </figure>
 
     <!-- POLAROID 5 -->
     <figure class="polaroid rotate-5">
       <span class="pin">📌</span>
-      <img src="images/photo5.jpg" alt="Ananya photo 5" onerror="this.src='https://via.placeholder.com/400x480/FFF3E0/E8B86D?text=add+photo5.jpg'">
+      <img src="images/photo5.jpg" alt="Annu photo 5" onerror="this.src='https://via.placeholder.com/400x480/FFF3E0/E8B86D?text=add+photo5.jpg'">
     </figure>
 
     <!-- POLAROID 6 -->
     <figure class="polaroid rotate-6 tall">
       <span class="pin">📌</span>
-      <img src="images/photo6.jpg" alt="Ananya photo 6" onerror="this.src='https://via.placeholder.com/400x620/EAEFF7/9AB6D9?text=add+photo6.jpg'">
+      <img src="images/photo6.jpg" alt="Annu photo 6" onerror="this.src='https://via.placeholder.com/400x620/EAEFF7/9AB6D9?text=add+photo6.jpg'">
+    </figure>
+
+    <!-- POLAROID 7 -->
+    <figure class="polaroid rotate-1">
+      <span class="tape">🎀</span>
+      <img src="images/photo7.jpg" alt="Annu photo 7" onerror="this.src='https://via.placeholder.com/400x500/FBEAEA/E8A0A0?text=add+photo7.jpg'">
+    </figure>
+
+    <!-- POLAROID 8 -->
+    <figure class="polaroid rotate-2 tall">
+      <span class="pin">📌</span>
+      <img src="images/photo8.jpg" alt="Annu photo 8" onerror="this.src='https://via.placeholder.com/400x600/FDF3F0/D98A9A?text=add+photo8.jpg'">
+    </figure>
+
+    <!-- POLAROID 9 -->
+    <figure class="polaroid rotate-3">
+      <span class="tape">🎀</span>
+      <img src="images/photo9.jpg" alt="Annu photo 9" onerror="this.src='https://via.placeholder.com/400x450/F3EAF5/B69AD9?text=add+photo9.jpg'">
+    </figure>
+
+    <!-- POLAROID 10 -->
+    <figure class="polaroid rotate-4 tall">
+      <span class="pin">📌</span>
+      <img src="images/photo10.jpg" alt="Annu photo 10" onerror="this.src='https://via.placeholder.com/400x580/EAF3EE/A9C5A0?text=add+photo10.jpg'">
+    </figure>
+
+    <!-- POLAROID 11 -->
+    <figure class="polaroid rotate-5">
+      <span class="tape">🎀</span>
+      <img src="images/photo11.jpg" alt="Annu photo 11" onerror="this.src='https://via.placeholder.com/400x480/FFF3E0/E8B86D?text=add+photo11.jpg'">
+    </figure>
+
+    <!-- POLAROID 12 -->
+    <figure class="polaroid rotate-6 tall">
+      <span class="pin">📌</span>
+      <img src="images/photo12.jpg" alt="Annu photo 12" onerror="this.src='https://via.placeholder.com/400x620/EAEFF7/9AB6D9?text=add+photo12.jpg'">
     </figure>
   </div>
 </section>
@@ -283,29 +389,22 @@
   <img src="" alt="" id="lightboxImg">
 </div>
 
-<!-- SLIDESHOW TEASER -->
-<section id="slideshow-teaser" class="slideshow-section reveal">
-  <p class="eyebrow center">everything, all mixed together</p>
-  <h2 class="section-title">our slideshow</h2>
-  <p class="section-note">
-    photos and videos, shuffled random each time. add your files to <code>images/</code>
-    and <code>videos/</code> — see README for the full list of filenames it looks for.
-  </p>
-  <button class="confetti-btn slideshow-btn" id="openSlideshow">▶ play our memories</button>
+<!-- OUR VIDEO -->
+<section id="our-video" class="video-section reveal">
+  <p class="eyebrow center">a little film, just for you</p>
+  <h2 class="section-title">our video</h2>
+  <button class="confetti-btn video-btn" id="openVideo">▶ tap to watch</button>
 </section>
 
-<!-- FULLSCREEN SLIDESHOW MODAL -->
-<div class="slideshow-modal" id="slideshowModal">
-  <button class="slideshow-close" id="slideshowClose" aria-label="close">✕</button>
-  <div class="slideshow-stage" id="slideshowStage"></div>
-
-  <div class="slideshow-controls">
-    <button id="ssPrev" aria-label="previous">⟨</button>
-    <button id="ssPlayPause" aria-label="play or pause">⏸</button>
-    <button id="ssMute" aria-label="mute or unmute">🔊</button>
-    <button id="ssNext" aria-label="next">⟩</button>
+<!-- FULLSCREEN VIDEO MODAL -->
+<div class="video-modal" id="videoModal">
+  <button class="video-close" id="videoClose" aria-label="close">✕</button>
+  <div class="video-stage">
+    <!-- add your edited video at videos/our-video.mp4 -->
+    <video id="ourVideo" playsinline controls>
+      <source src="videos/our-video.mp4" type="video/mp4">
+    </video>
   </div>
-  <div class="slideshow-progress" id="slideshowProgress"></div>
 </div>
 
 <!-- REASONS I LOVE YOU -->
@@ -365,7 +464,7 @@
       <div class="envelope-back"></div>
       <div class="envelope-letter" id="envelopeLetter">
         <div class="letter-paper">
-          <p class="letter-heading">To my Ananya,</p>
+          <p class="letter-heading">To my Annu,</p>
 
           <p class="letter-body">
             <!--
