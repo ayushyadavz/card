@@ -275,8 +275,4 @@ if (!isTouchDevice) {
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 900);
   });
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 1bc6e14cf0f52a7bfdeaa5475e54725c751f9e9c
