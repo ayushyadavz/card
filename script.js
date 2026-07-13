@@ -69,8 +69,8 @@ navLinks.querySelectorAll("a").forEach(link => {
 
 // ============================
 // MUSIC PLAYER (floating disc)
+// Darkhast plays automatically on page load and loops until she stops it.
 // Add your own song at audio/song.mp3 — see README.
-// Starts when she taps the disc directly, or when she opens the slideshow.
 // ============================
 const musicPlayer = document.getElementById("musicPlayer");
 const disc = document.getElementById("disc");
@@ -84,7 +84,7 @@ function playMusic() {
     disc.classList.add("spinning");
     musicState.textContent = "now playing";
   }).catch(() => {
-    // no song added yet, or browser blocked it — fails silently
+    // browser blocked autoplay — will retry on first tap/click anywhere
     musicState.textContent = "tap to play";
   });
 }
@@ -99,6 +99,15 @@ function pauseMusic() {
 musicPlayer.addEventListener("click", () => {
   musicPlaying ? pauseMusic() : playMusic();
 });
+
+// try to autoplay Darkhast as soon as the page loads
+window.addEventListener("load", playMusic);
+
+// most browsers block autoplay with sound until the user interacts —
+// this catches the very first tap/click anywhere on the page as a fallback
+document.body.addEventListener("click", () => {
+  if (!musicPlaying && !videoModal.classList.contains("open")) playMusic();
+}, { once: true });
 
 // ============================
 // SCROLL PROGRESS RIBBON
@@ -206,158 +215,52 @@ function blowOutCandles() {
 }
 
 // ============================
-// SLIDESHOW (random mix of photos + videos)
-// Edit the arrays below to match your actual filenames.
-// Photos live in images/, videos live in videos/.
+// OUR VIDEO
+// Add your edited video at videos/our-video.mp4 (see index.html).
+// Opening it pauses Darkhast (keeping its position); closing it
+// resumes Darkhast right where it left off.
 // ============================
-const slideshowPhotos = [
-  { type: "image", src: "images/photo1.jpg" },
-  { type: "image", src: "images/photo2.jpg" },
-  { type: "image", src: "images/photo3.jpg" },
-  { type: "image", src: "images/photo4.jpg" },
-  { type: "image", src: "images/photo5.jpg" },
-  { type: "image", src: "images/photo6.jpg" }
-];
-const slideshowVideos = [
-  { type: "video", src: "videos/video1.mp4" },
-  { type: "video", src: "videos/video2.mp4" },
-  { type: "video", src: "videos/video3.mp4" }
-];
+const videoModal = document.getElementById("videoModal");
+const openVideoBtn = document.getElementById("openVideo");
+const videoCloseBtn = document.getElementById("videoClose");
+const ourVideo = document.getElementById("ourVideo");
 
-function shuffleArray(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+let wasDarkhastPlayingBeforeVideo = false;
+
+function openVideo() {
+  // remember whether Darkhast was playing, then pause it (keeps its position)
+  wasDarkhastPlayingBeforeVideo = musicPlaying;
+  if (musicPlaying) pauseMusic();
+
+  videoModal.classList.add("open");
+  ourVideo.currentTime = 0;
+  ourVideo.play().catch(() => {});
 }
 
-const slideshowModal = document.getElementById("slideshowModal");
-const slideshowStage = document.getElementById("slideshowStage");
-const slideshowProgress = document.getElementById("slideshowProgress");
-const openSlideshowBtn = document.getElementById("openSlideshow");
-const slideshowCloseBtn = document.getElementById("slideshowClose");
-const ssPrev = document.getElementById("ssPrev");
-const ssNext = document.getElementById("ssNext");
-const ssPlayPause = document.getElementById("ssPlayPause");
-const ssMute = document.getElementById("ssMute");
+function closeVideo() {
+  ourVideo.pause();
+  videoModal.classList.remove("open");
 
-let ssItems = [];
-let ssIndex = 0;
-let ssPlaying = true;
-let ssMuted = false;
-let ssTimer = null;
-const PHOTO_DURATION = 4000; // ms each photo stays on screen
-
-function buildSlideshowItems() {
-  const combined = [...slideshowPhotos, ...slideshowVideos];
-  ssItems = shuffleArray(combined);
+  // resume Darkhast right where it left off, but only if it was playing before
+  if (wasDarkhastPlayingBeforeVideo) playMusic();
 }
 
-function renderProgressDots() {
-  slideshowProgress.innerHTML = "";
-  ssItems.forEach((_, i) => {
-    const dot = document.createElement("span");
-    if (i === ssIndex) dot.classList.add("active");
-    slideshowProgress.appendChild(dot);
-  });
-}
-
-function clearStage() {
-  slideshowStage.innerHTML = "";
-  if (ssTimer) { clearTimeout(ssTimer); ssTimer = null; }
-}
-
-function showSlide(index) {
-  clearStage();
-  if (ssItems.length === 0) return;
-  ssIndex = (index + ssItems.length) % ssItems.length;
-  const item = ssItems[ssIndex];
-  renderProgressDots();
-
-  if (item.type === "image") {
-    const img = document.createElement("img");
-    img.src = item.src;
-    img.alt = item.caption || "";
-    img.onerror = () => { img.src = "https://via.placeholder.com/800x600/2b1b20/E8A0A0?text=add+" + item.src.split("/").pop(); };
-    slideshowStage.appendChild(img);
-    if (ssPlaying) {
-      ssTimer = setTimeout(() => showSlide(ssIndex + 1), PHOTO_DURATION);
-    }
-  } else {
-    const video = document.createElement("video");
-    video.src = item.src;
-    video.muted = ssMuted;
-    video.playsInline = true;
-    video.autoplay = true;
-    video.onerror = () => {
-      // missing video file — skip to next slide after a short pause
-      if (ssPlaying) ssTimer = setTimeout(() => showSlide(ssIndex + 1), 1200);
-    };
-    if (ssPlaying) {
-      video.onended = () => showSlide(ssIndex + 1);
-      video.play().catch(() => {});
-    } else {
-      video.pause();
-    }
-    slideshowStage.appendChild(video);
-  }
-}
-
-function openSlideshow() {
-  buildSlideshowItems();
-  ssPlaying = true;
-  ssPlayPause.textContent = "⏸";
-  slideshowModal.classList.add("open");
-  showSlide(0);
-}
-
-function closeSlideshow() {
-  clearStage();
-  slideshowModal.classList.remove("open");
-}
-
-openSlideshowBtn.addEventListener("click", () => {
-  if (!musicPlaying) playMusic();
-  openSlideshow();
-});
-slideshowCloseBtn.addEventListener("click", closeSlideshow);
-slideshowModal.addEventListener("click", (e) => {
-  if (e.target === slideshowModal) closeSlideshow();
+openVideoBtn.addEventListener("click", openVideo);
+videoCloseBtn.addEventListener("click", closeVideo);
+videoModal.addEventListener("click", (e) => {
+  if (e.target === videoModal) closeVideo();
 });
 
-ssPrev.addEventListener("click", () => showSlide(ssIndex - 1));
-ssNext.addEventListener("click", () => showSlide(ssIndex + 1));
-
-ssPlayPause.addEventListener("click", () => {
-  ssPlaying = !ssPlaying;
-  ssPlayPause.textContent = ssPlaying ? "⏸" : "▶";
-  const currentVideo = slideshowStage.querySelector("video");
-  if (currentVideo) {
-    ssPlaying ? currentVideo.play().catch(() => {}) : currentVideo.pause();
-    if (ssPlaying) currentVideo.onended = () => showSlide(ssIndex + 1);
-  } else if (ssPlaying) {
-    ssTimer = setTimeout(() => showSlide(ssIndex + 1), PHOTO_DURATION);
-  } else if (ssTimer) {
-    clearTimeout(ssTimer);
-  }
-});
-
-ssMute.addEventListener("click", () => {
-  ssMuted = !ssMuted;
-  ssMute.textContent = ssMuted ? "🔇" : "🔊";
-  const currentVideo = slideshowStage.querySelector("video");
-  if (currentVideo) currentVideo.muted = ssMuted;
+// if the video finishes playing on its own, bring Darkhast back too
+ourVideo.addEventListener("ended", () => {
+  if (wasDarkhastPlayingBeforeVideo) playMusic();
 });
 
 document.addEventListener("keydown", (e) => {
-  if (!slideshowModal.classList.contains("open")) return;
-  if (e.key === "Escape") closeSlideshow();
-  if (e.key === "ArrowRight") showSlide(ssIndex + 1);
-  if (e.key === "ArrowLeft") showSlide(ssIndex - 1);
+  if (!videoModal.classList.contains("open")) return;
+  if (e.key === "Escape") closeVideo();
 });
-const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+
 if (!isTouchDevice) {
   let lastSpawn = 0;
   document.addEventListener("mousemove", (e) => {
