@@ -38,7 +38,7 @@ body {
 
 .section-title {
   font-family: 'Caveat', cursive;
-  font-size: 3.2rem;
+  font-size: clamp(2.2rem, 7vw, 3.2rem);
   color: var(--plum);
   text-align: center;
   margin: 0.2rem 0 0.6rem;
@@ -293,12 +293,16 @@ body {
 .flower-2 { top: 20%; right: 12%; width: 34px; animation-delay: 0.8s; }
 .flower-3 { bottom: 26%; left: 9%;  width: 44px; animation-delay: 1.6s; }
 .flower-4 { bottom: 10%; right: 20%; width: 38px; animation-delay: 0.4s; }
+.flower-5 { top: 3%; right: 34%; width: 30px; animation-delay: 1.2s; }
+.flower-6 { bottom: 3%; left: 30%; width: 32px; animation-delay: 2s; }
 
 @media (max-width: 700px) {
   .flower-1 { top: 6%; left: 10%; }
   .flower-2 { top: 13%; right: 8%; }
   .flower-3 { bottom: 32%; left: 5%; }
   .flower-4 { bottom: 6%; right: 8%; }
+  .flower-5 { top: 2%; right: 22%; }
+  .flower-6 { bottom: 2%; left: 18%; }
 }
 
 @keyframes flowerSway {
@@ -306,14 +310,54 @@ body {
   50% { transform: rotate(6deg) translateY(-4px); }
 }
 
+/* sparkles */
+.hero-sparkle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  animation: sparkleTwinkle 2.4s ease-in-out infinite;
+}
+.hero-sparkle svg { width: 100%; height: 100%; display: block; }
+
+.sparkle-1 { top: 5%;   right: 28%; width: 20px; height: 20px; animation-delay: 0.2s; }
+.sparkle-2 { top: 36%;  left: 4%;   width: 16px; height: 16px; animation-delay: 1s; }
+.sparkle-3 { bottom: 36%; right: 5%; width: 18px; height: 18px; animation-delay: 0.6s; }
+.sparkle-4 { top: 48%;  right: 3%;  width: 14px; height: 14px; animation-delay: 1.4s; }
+.sparkle-5 { bottom: 5%; left: 33%; width: 18px; height: 18px; animation-delay: 0.3s; }
+
+@keyframes sparkleTwinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.15) rotate(20deg); }
+}
+
+@media (max-width: 700px) {
+  .sparkle-1 { right: 20%; }
+  .sparkle-3 { right: 3%; }
+  .sparkle-5 { left: 22%; }
+}
+
+/* mini hearts */
+.hero-mini-heart {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.75;
+  animation: flowerSway 4.5s ease-in-out infinite;
+}
+.hero-mini-heart svg { width: 100%; height: 100%; display: block; }
+
+.mini-heart-1 { top: 32%; left: 3%;   width: 22px; height: 20px; animation-delay: 0.5s; }
+.mini-heart-2 { bottom: 42%; right: 4%; width: 20px; height: 18px; animation-delay: 1.2s; }
+.mini-heart-3 { top: 2%;  left: 46%;  width: 18px; height: 16px; animation-delay: 0.9s; }
+
+@media (max-width: 700px) {
+  .mini-heart-1 { left: 2%; }
+  .mini-heart-2 { right: 2%; }
+}
+
 /* ===========================
    HERO POLAROIDS
 =========================== */
-.hero-photos-note {
-  margin: 0.4rem auto 1rem;
-  max-width: 380px;
-}
-
 .hero-scene-row {
   display: flex;
   justify-content: center;
@@ -334,6 +378,21 @@ body {
   flex-shrink: 0;
 }
 
+.hero-photo-row {
+  display: flex;
+  gap: clamp(0.3rem, 1.4vw, 0.8rem);
+}
+
+.hero-polaroid-pair {
+  width: clamp(40px, 9.5vw, 96px);
+}
+
+.hero-photo-side {
+  margin-top: clamp(0.2rem, 1vw, 0.5rem);
+}
+.hero-photo-side-right { align-self: flex-end; }
+.hero-photo-side-left { align-self: flex-start; }
+
 .hero-polaroid {
   width: clamp(52px, 13vw, 128px);
   margin-bottom: 0;
@@ -347,13 +406,15 @@ body {
   margin-top: 0.35rem;
 }
 
-.hero-side-left .hero-polaroid:first-child { align-self: flex-end; }
-.hero-side-right .hero-polaroid:first-child { align-self: flex-start; }
-
+/* distinct tilts only — size and position stay uniform */
 .hero-tilt-1 { transform: rotate(-9deg); }
 .hero-tilt-2 { transform: rotate(6deg); }
-.hero-tilt-3 { transform: rotate(-6deg); }
-.hero-tilt-4 { transform: rotate(9deg); }
+.hero-tilt-3 { transform: rotate(-4deg); }
+.hero-tilt-4 { transform: rotate(11deg); }
+.hero-tilt-5 { transform: rotate(-13deg); }
+.hero-tilt-6 { transform: rotate(4deg); }
+.hero-tilt-7 { transform: rotate(-7deg); }
+.hero-tilt-8 { transform: rotate(9deg); }
 
 .hero-title {
   font-family: 'Caveat', cursive;
@@ -361,7 +422,7 @@ body {
   font-size: clamp(3rem, 9vw, 5.5rem);
   line-height: 1.05;
   color: var(--plum);
-  margin: 0.6rem 0;
+  margin: 0.6rem 0 0.2rem;
 }
 .hero-title span {
   color: var(--rose-deep);
@@ -605,17 +666,17 @@ body {
 }
 
 .masonry {
-  columns: 3 280px;
-  column-gap: 1.6rem;
+  columns: 4 180px;
+  column-gap: 1rem;
 }
 @media (max-width: 700px) {
-  .masonry { columns: 1 280px; }
+  .masonry { columns: 2 130px; column-gap: 0.7rem; }
 }
 
 .polaroid {
   background: #fff;
-  padding: 0.7rem 0.7rem 1.4rem;
-  margin-bottom: 1.8rem;
+  padding: 0.45rem 0.45rem 0.9rem;
+  margin-bottom: 1rem;
   border-radius: 4px;
   box-shadow: var(--shadow);
   break-inside: avoid;
@@ -626,17 +687,21 @@ body {
 
 .polaroid img {
   width: 100%;
+  aspect-ratio: 4 / 5;
   display: block;
   border-radius: 2px;
   object-fit: cover;
 }
+.polaroid.tall img {
+  aspect-ratio: 4 / 6;
+}
 
 .polaroid figcaption {
   font-family: 'Caveat', cursive;
-  font-size: 1.25rem;
+  font-size: 1rem;
   text-align: center;
   color: var(--plum-soft);
-  margin-top: 0.6rem;
+  margin-top: 0.4rem;
 }
 
 .pin, .tape {
@@ -675,8 +740,8 @@ body {
 
 .envelope {
   position: relative;
-  width: 320px;
-  height: 220px;
+  width: min(90vw, 320px);
+  height: min(62vw, 220px);
   cursor: pointer;
 }
 
@@ -707,9 +772,9 @@ body {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 0;
-  border-left: 160px solid transparent;
-  border-right: 160px solid transparent;
-  border-top: 130px solid var(--rose-deep);
+  border-left: min(45vw, 160px) solid transparent;
+  border-right: min(45vw, 160px) solid transparent;
+  border-top: min(37vw, 130px) solid var(--rose-deep);
 }
 
 .envelope-label {
@@ -772,7 +837,7 @@ body {
   transform: rotateX(-150deg);
 }
 .envelope.open .envelope-letter {
-  height: 340px;
+  height: min(340px, 60vh);
   bottom: 22%;
   transform: translateY(-30px);
   overflow-y: auto;
@@ -810,37 +875,36 @@ body {
 }
 
 /* ===========================
-   SLIDESHOW TEASER
+   OUR VIDEO
 =========================== */
-.slideshow-section {
+.video-section {
   padding: 2rem 1.5rem 4rem;
   text-align: center;
 }
-.slideshow-btn {
+.video-btn {
   background: var(--plum);
   margin-top: 0.5rem;
 }
-.slideshow-btn:hover { background: #3a232a; }
+.video-btn:hover { background: #3a232a; }
 
 /* ===========================
-   FULLSCREEN SLIDESHOW MODAL
+   FULLSCREEN VIDEO MODAL
 =========================== */
-.slideshow-modal {
+.video-modal {
   position: fixed;
   inset: 0;
   background: #000;
   z-index: 500;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease;
 }
-.slideshow-modal.open { opacity: 1; visibility: visible; }
+.video-modal.open { opacity: 1; visibility: visible; }
 
-.slideshow-close {
+.video-close {
   position: absolute;
   top: 20px;
   right: 24px;
@@ -855,7 +919,7 @@ body {
   z-index: 2;
 }
 
-.slideshow-stage {
+.video-stage {
   width: 100%;
   height: 100%;
   display: flex;
@@ -863,60 +927,13 @@ body {
   justify-content: center;
   position: relative;
 }
-.slideshow-stage img,
-.slideshow-stage video {
+.video-stage video {
   max-width: 92vw;
-  max-height: 78vh;
+  max-height: 82vh;
   border-radius: 10px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  animation: ssFadeIn 0.5s ease;
-}
-@keyframes ssFadeIn {
-  from { opacity: 0; transform: scale(0.97); }
-  to { opacity: 1; transform: scale(1); }
 }
 
-.slideshow-controls {
-  position: absolute;
-  bottom: 46px;
-  display: flex;
-  gap: 1rem;
-  z-index: 2;
-}
-.slideshow-controls button {
-  background: rgba(255,255,255,0.12);
-  border: none;
-  color: #fff;
-  font-size: 1.2rem;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.slideshow-controls button:hover { background: rgba(255,255,255,0.25); }
-
-.slideshow-progress {
-  position: absolute;
-  bottom: 20px;
-  display: flex;
-  gap: 6px;
-  z-index: 2;
-  max-width: 80vw;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.slideshow-progress span {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.3);
-  transition: background 0.2s, transform 0.2s;
-}
-.slideshow-progress span.active {
-  background: var(--rose);
-  transform: scale(1.3);
-}
 .polaroid img { cursor: zoom-in; }
 
 .lightbox {
@@ -1051,4 +1068,16 @@ a:focus-visible, button:focus-visible {
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
+}
+
+/* ===========================
+   SMALL-PHONE FINE TUNING
+=========================== */
+@media (max-width: 380px) {
+  .navbar { padding: 1rem 1.1rem; }
+  .nav-logo { font-size: 1.25rem; }
+  .letter-paper { padding: 1.1rem 1.1rem 1.4rem; }
+  .letter-heading { font-size: 1.4rem; }
+  .letter-body, .letter-signoff { font-size: 0.88rem; }
+  .confetti-btn { padding: 0.7rem 1.3rem; font-size: 0.85rem; }
 }
