@@ -441,7 +441,7 @@ body {
   position: relative;
   width: clamp(150px, 46vw, 300px);
   aspect-ratio: 300 / 220;
-  margin: 1rem auto 1.6rem;
+  margin: 1rem auto 0.6rem;
   flex-shrink: 0;
 }
 
@@ -1080,4 +1080,7 @@ a:focus-visible, button:focus-visible {
   .letter-heading { font-size: 1.4rem; }
   .letter-body, .letter-signoff { font-size: 0.88rem; }
   .confetti-btn { padding: 0.7rem 1.3rem; font-size: 0.85rem; }
+  .reasons-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+  .flip-card { height: 150px; }
+  .flip-front, .flip-back { padding: 0.9rem; font-size: 0.85rem; }
 }
