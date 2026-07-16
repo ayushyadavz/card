@@ -1,4 +1,48 @@
 // ============================
+// ENTRY GATE ("Annuu... you wanted to see this??")
+// The "no" button playfully dodges the cursor and can never be pressed.
+// Clicking "yes" reveals the site and — as a genuine user gesture —
+// reliably kicks off the background music too.
+// ============================
+const entryGate = document.getElementById("entryGate");
+const entryCard = document.querySelector(".entry-card");
+const entryYes = document.getElementById("entryYes");
+const entryNo = document.getElementById("entryNo");
+
+document.body.classList.add("gate-active"); // lock scroll while the gate is up
+
+function dodgeNoButton() {
+  const cardRect = entryCard.getBoundingClientRect();
+  const btnRect = entryNo.getBoundingClientRect();
+  const pad = 14;
+  const maxLeft = Math.max(pad, cardRect.width - btnRect.width - pad);
+  const maxTop = Math.max(pad, cardRect.height - btnRect.height - pad);
+  const newLeft = pad + Math.random() * (maxLeft - pad);
+  const newTop = pad + Math.random() * (maxTop - pad);
+  entryNo.classList.add("dodging");
+  entryNo.style.left = newLeft + "px";
+  entryNo.style.top = newTop + "px";
+}
+
+entryNo.addEventListener("mouseenter", dodgeNoButton);
+entryNo.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  dodgeNoButton();
+}, { passive: false });
+entryNo.addEventListener("click", (e) => {
+  // in case a click ever lands on it before it can dodge — never let it work
+  e.preventDefault();
+  dodgeNoButton();
+});
+
+entryYes.addEventListener("click", () => {
+  document.body.classList.remove("gate-active");
+  entryGate.classList.add("hidden");
+  playMusic(); // a real click — the browser will allow sound to start here
+  setTimeout(() => entryGate.remove(), 500);
+});
+
+// ============================
 // FLOATING HEARTS (ambient)
 // ============================
 const heartsLayer = document.getElementById("heartsLayer");
@@ -100,14 +144,10 @@ musicPlayer.addEventListener("click", () => {
   musicPlaying ? pauseMusic() : playMusic();
 });
 
-// try to autoplay Darkhast as soon as the page loads
-window.addEventListener("load", playMusic);
-
-// most browsers block autoplay with sound until the user interacts —
-// this catches the very first tap/click anywhere on the page as a fallback
-document.body.addEventListener("click", () => {
-  if (!musicPlaying && !videoModal.classList.contains("open")) playMusic();
-}, { once: true });
+// Darkhast is intentionally NOT autoplayed on page load — it starts only
+// when she clicks "yesss" on the entry gate (see the entryYes handler
+// above). That click is a genuine user gesture, so the browser is
+// guaranteed to allow the sound to start right then, every time.
 
 // ============================
 // SCROLL PROGRESS RIBBON
@@ -224,8 +264,18 @@ const videoModal = document.getElementById("videoModal");
 const openVideoBtn = document.getElementById("openVideo");
 const videoCloseBtn = document.getElementById("videoClose");
 const ourVideo = document.getElementById("ourVideo");
+const videoPlayOverlay = document.getElementById("videoPlayOverlay");
 
 let wasDarkhastPlayingBeforeVideo = false;
+
+function tryPlayVideo() {
+  ourVideo.play().then(() => {
+    videoPlayOverlay.classList.remove("show");
+  }).catch(() => {
+    // browser blocked autoplay (common on mobile) — show a big obvious play button
+    videoPlayOverlay.classList.add("show");
+  });
+}
 
 function openVideo() {
   // remember whether Darkhast was playing, then pause it (keeps its position)
@@ -234,12 +284,21 @@ function openVideo() {
 
   videoModal.classList.add("open");
   ourVideo.currentTime = 0;
-  ourVideo.play().catch(() => {});
+  tryPlayVideo();
 }
+
+videoPlayOverlay.addEventListener("click", () => {
+  tryPlayVideo();
+});
+
+ourVideo.addEventListener("play", () => {
+  videoPlayOverlay.classList.remove("show");
+});
 
 function closeVideo() {
   ourVideo.pause();
   videoModal.classList.remove("open");
+  videoPlayOverlay.classList.remove("show");
 
   // resume Darkhast right where it left off, but only if it was playing before
   if (wasDarkhastPlayingBeforeVideo) playMusic();
@@ -251,28 +310,32 @@ videoModal.addEventListener("click", (e) => {
   if (e.target === videoModal) closeVideo();
 });
 
-// if the video finishes playing on its own, bring Darkhast back too
-ourVideo.addEventListener("ended", () => {
-  if (wasDarkhastPlayingBeforeVideo) playMusic();
-});
+// video finishing on its own does NOT bring Darkhast back —
+// it only resumes once the video section is explicitly closed (✕, outside click, or Escape)
 
 document.addEventListener("keydown", (e) => {
   if (!videoModal.classList.contains("open")) return;
   if (e.key === "Escape") closeVideo();
 });
 
-if (!isTouchDevice) {
-  let lastSpawn = 0;
-  document.addEventListener("mousemove", (e) => {
-    const now = Date.now();
-    if (now - lastSpawn < 90) return;
-    lastSpawn = now;
-    const heart = document.createElement("span");
-    heart.className = "cursor-heart";
-    heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
-    heart.style.left = e.clientX + "px";
-    heart.style.top = e.clientY + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 900);
-  });
+// cursor/finger heart trail — works with mouse AND touch drag
+let lastSpawn = 0;
+function spawnCursorHeart(x, y) {
+  const now = Date.now();
+  if (now - lastSpawn < 90) return;
+  lastSpawn = now;
+  const heart = document.createElement("span");
+  heart.className = "cursor-heart";
+  heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+  heart.style.left = x + "px";
+  heart.style.top = y + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 900);
 }
+document.addEventListener("pointermove", (e) => {
+  spawnCursorHeart(e.clientX, e.clientY);
+});
+document.addEventListener("touchmove", (e) => {
+  const t = e.touches[0];
+  if (t) spawnCursorHeart(t.clientX, t.clientY);
+}, { passive: true }); 
